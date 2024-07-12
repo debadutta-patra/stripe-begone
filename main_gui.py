@@ -10,6 +10,17 @@ from matplotlib.backends.backend_tkagg import (
 from skimage import io
 import threading
 
+instructions = '''
+1. Use the Open  File button to open and image file.
+2. Adjust the Wedge size and Theta values to define the wedge Use the View wedge button to make sure that the size and angle of the wedge covers the noise in the Fourier space.
+3. Use the add wedge button to add the current values to the processing parameters.
+4. You can view and edit the already added wedges using the provided drop down button.
+5. Once satisfied with the parameters click on remove stripe button to strat the processing. Once the processing is complete the button should turn green.
+6. Use the show processed Button to view the processed image and the fft.
+7. If you encounter a significant loss in contrast adjust the p1 and p2 values perform a simple contrast enhancement.
+
+App created by Debadutta Patra
+'''
 
 class settings_frame(tb.Frame):
     def __init__(self, master, current_theme,):
@@ -50,11 +61,17 @@ class image_tabs(tb.Notebook):
         self.out_img = tb.Frame(self)
         self.out_fft = tb.Frame(self)
         self.enh_img = tb.Frame(self)
+        self.instructions = tb.Frame(self)
+        self.instructions_box = tb.Text(self.instructions,wrap=WORD,font=('Helvetica',20))
+        self.instructions_box.pack(fill=BOTH,expand=YES)
+        self.instructions_box.insert(END,instructions)
+        self.instructions_box.config(state=DISABLED)
         self.add(self.in_img, text='Input Image')
         self.add(self.in_fft, text='Input FFT')
         self.add(self.out_img, text='Recon Image')
         self.add(self.out_fft, text='Recon FFT')
         self.add(self.enh_img, text='Enhanced Image')
+        self.add(self.instructions, text='Instructions')
 
 
 class io_frame(tb.Frame):
@@ -72,7 +89,7 @@ class io_frame(tb.Frame):
 #       widgets for setting the wedge size
 #       wedge size
         self.wedge_label = tb.Label(
-            self, text='Wedge Size:', bootstyle='primary', font=('Helverica', 14))
+            self, text='Wedge Size:', bootstyle='primary', font=('Helvetica', 14))
         self.wedge_label.grid(column=0, row=1, padx=10, pady=10, sticky='e')
         self.wedge_spinbox = tb.Spinbox(self,
                                         from_=0, to=180, increment=0.2, bootstyle='primary')
@@ -81,7 +98,7 @@ class io_frame(tb.Frame):
 
 #       angle theta
         self.theta_label = tb.Label(
-            self, text='Theta:', bootstyle='primary', font=('Helverica', 14))
+            self, text='Theta:', bootstyle='primary', font=('Helvetica', 14))
         self.theta_label.grid(column=0, row=2, padx=10, pady=10, sticky='e')
         self.theta_spinbox = tb.Spinbox(self,
                                         from_=-90, to=90, increment=0.2, bootstyle='primary')
@@ -89,7 +106,7 @@ class io_frame(tb.Frame):
         self.theta_spinbox.grid(column=1, row=2, padx=10, pady=10)
 
         self.kmin_label = tb.Label(
-            self, text='K_min:', bootstyle='primary', font=('Helverica', 14))
+            self, text='K_min:', bootstyle='primary', font=('Helvetica', 14))
         self.kmin_label.grid(column=0, row=3, padx=10, pady=10, sticky='e')
         self.kmin_spinbox = tb.Spinbox(self,
                                        from_=1, to=200, increment=1, bootstyle='primary')
@@ -149,7 +166,7 @@ class io_frame(tb.Frame):
         self.save_image.config(state=DISABLED)
 
         self.p1_label = tb.Label(
-            self, text='p_1:', bootstyle='primary', font=('Helverica', 14))
+            self, text='p_1:', bootstyle='primary', font=('Helvetica', 14))
         self.p1_label.grid(column=0, row=9, padx=10, pady=10, sticky='e')
 
         self.p1_spinbox = tb.Spinbox(self,
@@ -158,7 +175,7 @@ class io_frame(tb.Frame):
         self.p1_spinbox.grid(column=1, row=9, padx=10, pady=10)
 
         self.p2_label = tb.Label(
-            self, text='p_2:', bootstyle='primary', font=('Helverica', 14))
+            self, text='p_2:', bootstyle='primary', font=('Helvetica', 14))
         self.p2_label.grid(column=0, row=10, padx=10, pady=10, sticky='e')
         self.p2_spinbox = tb.Spinbox(self,
                                      from_=0, to=100, increment=0.1, bootstyle='primary')
@@ -179,7 +196,7 @@ class io_frame(tb.Frame):
 
 
 class MyApp(tb.Window):
-    def __init__(self, title="Stripe Begone", themename="litera", iconphoto='', size=None,
+    def __init__(self, title="Stripe Begone", themename="litera", iconphoto='./icon.png', size=None,
                  position=None, minsize=None, maxsize=None, resizable=None, hdpi=True, scaling=None,
                  transient=None, overrideredirect=False, alpha=1):
         super().__init__(title, themename, iconphoto, size, position, minsize,
