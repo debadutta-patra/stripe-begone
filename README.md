@@ -14,25 +14,33 @@ To create a virtual environment you can use either `venv` or `conda`.
 
 With 'venv' use the following command
 
-`python3 -m venv path/to/create/environment/folder`\
-`source path/to/created/environment/bin/activate`
+```bash:
+python3 -m venv path/to/create/environment/folder
+source path/to/created/environment/bin/activate
+```
 
 Alternatively if using conda use
 
-`conda create -n myenvname python=3.12`\
-`conda activate myenvname`
+```bash:
+conda create -n myenvname python=3.12
+conda activate myenvname
+```
 
 ### Installing dependency
 
 To install dependencies use 
 
-`pip install -r requirements.txt`
+```bash:
+pip install -r requirements.txt
+```
 
 ## Usage
 
 You can start the application by double clicking the stripe-begone.exe or if using the source code type
 
-`python main_gui.py`
+```bash:
+python main_gui.py
+```
 
 A brief description of how to use the software can be found inside the application under instructions tab.
 
