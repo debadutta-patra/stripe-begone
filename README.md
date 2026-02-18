@@ -28,11 +28,52 @@ Stripe Begone is a GUI-based tool designed to remove stripe artifacts from micro
 - Matplotlib
 - PyTorch
 
+## Installation
+
+### Prerequisites
+
+*   Python 3.14 or higher recommended (Though it is not tested it should run with earlier version of Python 3).
+*   [uv](https://github.com/astral-sh/uv) (optional, but recommended for building).
+
+### Installation 
+#### Quick Start with uv
+The fastest way to try pyTRACTnmr without installation is:
+
+```bash
+uvx IteraStripe
+```
+
+#### Using pip
+
+```bash
+pip install IteraStripe
+```
+
+#### From Source
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/debadutta-patra/IteraStripe
+    cd pyTRACTnmr
+    ```
+
+2.  **Install the package:**
+
+    Using `uv` (fastest):
+    ```bash
+    uv pip install .
+    ```
+
+    Using standard `pip`:
+    ```bash
+    pip install .
+    ```
+
 ## Usage
 
 1. **Launch the Application**:
    ```bash
-   python main_gui.py
+   python src/IteraStripe/main.py
    ```
 
 2. **Load an Image**:
@@ -51,3 +92,4 @@ Stripe Begone is a GUI-based tool designed to remove stripe artifacts from micro
    - Use the tabs to view the Reconstruction, Difference map, or FFT.
    - Apply **Texture Recovery** if the result is too smooth.
    - Save the final image.
+
