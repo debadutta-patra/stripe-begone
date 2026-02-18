@@ -1,4 +1,4 @@
-# Stripe Begone
+# IteraStripe
 
 Stripe Begone is a GUI-based tool designed to remove stripe artifacts from microscopy images (specifically SEM/FIB-SEM) using Fourier space masking and advanced reconstruction algorithms.
 
